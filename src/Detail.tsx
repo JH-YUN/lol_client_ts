@@ -23,8 +23,13 @@ function Detail(props: { dataApiAddr: string }) {
   const [selectedPosition, setSelectedPosition] = useState('');
 
   const getChampionDetail = async () => {
-    const detail = JSON.parse(fs.readFileSync(`public/data/champions/${championId}.json`, { encoding: 'utf-8' }));
-    setChampionDetail(detail);
+    try {
+      let detail = JSON.parse(fs.readFileSync(`public/data/champions/${championId}.json`, { encoding: 'utf-8' }));
+      setChampionDetail(detail);
+    } catch (e) {
+      setChampionDetail({});
+    }
+
   }
 
   const getChampionData = async () => {
